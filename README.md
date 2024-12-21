@@ -31,7 +31,6 @@ Key features include:
   - JavaFX for GUI and interactive visualization.
   - Custom-built utilities for complex number calculations.
 - **Tools**:
-  - IntelliJ IDEA or Eclipse for development.
   - GitHub for version control.
 
 --- 
