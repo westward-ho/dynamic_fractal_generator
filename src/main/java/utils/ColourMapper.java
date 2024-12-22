@@ -3,32 +3,22 @@ package utils;
 import javafx.scene.paint.Color;
 
 public class ColourMapper {
-    private final Color startColour;
-    private final Color endColour;
     private final int maxIterations;
 
-    public ColourMapper(Color startColour, Color endColour, int maxIterations) {
-        this.startColour = startColour;
-        this.endColour = endColour;
+    public ColourMapper(int maxIterations) {
         this.maxIterations = maxIterations;
     }
 
-
     public Color map(int iteration) {
         if (iteration >= maxIterations) {
-            return endColour;
+            return Color.BLACK; // Points inside the Mandelbrot set remain black
         }
 
-        double ratio = (double) iteration / maxIterations;
+        // Smooth color gradient for points outside the Mandelbrot set
+        double hue = 240.0 - (240.0 * iteration / maxIterations); // Blue to light tones
+        double saturation = 0.6; // Softer saturation
+        double brightness = 0.7; // Lighter brightness for outside
 
-        double red = startColour.getRed() + ratio * (endColour.getRed() - startColour.getRed());
-        double green = startColour.getGreen() + ratio * (endColour.getGreen() - startColour.getGreen());
-        double blue = startColour.getBlue() + ratio * (endColour.getBlue() - startColour.getBlue());
-
-        return new Color(clamp(red), clamp(green), clamp(blue), 1.0);
-    }
-
-    public double clamp(double value) {
-        return Math.min(1.0, Math.max(0.0, value));
+        return Color.hsb(hue, saturation, brightness);
     }
 }

@@ -1,25 +1,29 @@
 package application;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import rendering.FractalManager;
 
 public class Main extends Application {
+    
     @Override
     public void start(Stage primaryStage) {
-        // Create a simple label with text
-        Label label = new Label("Hello, JavaFX!");
+        primaryStage.setTitle("Dynamic Fractal Generator");
 
-        // Add the label to the root StackPane
+        Canvas canvas = new Canvas(800, 800);
+        FractalManager fractalManager = new FractalManager(canvas);
+
+        fractalManager.drawFractal();
+
         StackPane root = new StackPane();
-        root.getChildren().add(label);
+        root.getChildren().add(canvas);
 
-        // Create the scene and add it to the stage
-        Scene scene = new Scene(root, 800, 600);
-        primaryStage.setTitle("JavaFX Test");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
