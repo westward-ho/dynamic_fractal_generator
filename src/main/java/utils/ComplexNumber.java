@@ -37,6 +37,10 @@ public class ComplexNumber {
 
     @Override
     public String toString() {
-        return String.format("%.2f + %.2fi", real, imaginary);
+        if (imaginary >= 0) {
+            return real + " + " + imaginary + "i";
+        } else {
+            return real + " - " + (-imaginary) + "i";
+        }
     }
 }
